@@ -1,0 +1,59 @@
+
+--drużyna z srednią najstarszych zawodników
+select team_abbreviation, avg(age) as avg_age from all_seasons as2 group by team_abbreviation order by avg_age desc; 
+
+--gracze z największą liczbą punktów w danym sezonie
+SELECT player_name, season, MAX(pts) AS max_pts
+FROM all_seasons as2 
+GROUP BY season, player_name 
+order by season  desc
+
+-- Poniżej przedstawiam kilku znanych zawodników, którzy byli uważani za jednych z najlepszych w NBA w okresie do września 2021 roku:
+--LeBron James (Los Angeles Lakers) - LeBron James jest uważany za jednego z najlepszych koszykarzy w historii NBA. 
+--Wciąż osiągał znakomite wyniki i prowadził swoje drużyny do sukcesów.
+--Kevin Durant (Brooklyn Nets) - Durant jest jednym z najlepszych strzelców w historii NBA i zdobywał wiele nagród, w tym tytuł MVP finałów NBA.
+--Giannis Antetokounmpo (Milwaukee Bucks) - Giannis zdobył tytuł MVP NBA i prowadził Bucks do mistrzostwa NBA w sezonie 2020-2021.
+--Kawhi Leonard (Los Angeles Clippers) - Leonard jest znany z obrony i zdobywania tytułów MVP finałów NBA.
+--Luka Dončić (Dallas Mavericks) - Młody slooweński zawodnik jest uważany za jednego z najbardziej obiecujących graczy w NBA.
+--Nikola Jokić (Denver Nuggets) - Jokić został uznany za MVP NBA w sezonie 2020-2021 i jest jednym z najlepszych środkowych zawodników w lidze.
+--Pamiętaj, że sytuacja w NBA może się zmieniać wraz z nowymi sezonami, a nowi zawodnicy mogą wchodzić na scenę. Aby dowiedzieć się, kto jest obecnie 
+--uważany za najlepszego zawodnika NBA, warto sprawdzić najnowsze statystyki i wiadomości sportowe.
+
+--najlepsze lata Lebrona James
+SELECT player_name,pts,season, team_abbreviation FROM all_seasons as2  WHERE player_name ='LeBron James' order by pts desc;
+
+--najlepsze lata Kevina Durant
+SELECT player_name,pts,season, team_abbreviation FROM all_seasons as2  WHERE player_name ='Kevin Durant' order by pts desc;
+
+--Średnia liczba punktów, zbiórek i asyst w poszczególnych sezonach
+SELECT season, AVG(pts) AS srednia_punkty, AVG(reb) AS srednia_zbiorki, AVG(ast) AS srednia_asysty
+FROM all_seasons
+GROUP BY season
+ORDER BY season;
+
+--Najlepsi strzelcy, zbiórkowcy i asystenci w historii NBA:
+SELECT player_name, MAX(pts) AS maks_punkty, MAX(reb) AS maks_zbiorki, MAX(ast) AS maks_asysty
+FROM all_seasons
+GROUP BY player_name
+ORDER BY maks_punkty DESC, maks_zbiorki DESC, maks_asysty DESC;
+
+--Średni wzrost i waga graczy w poszczególnych sezonach:
+SELECT season, AVG(player_height) AS sredni_wzrost, AVG(player_weight) AS srednia_waga
+FROM all_seasons
+GROUP BY season
+ORDER BY season;
+
+--Wykresy punktów, zbiórek i asyst w zależności od wieku graczy:
+SELECT age, AVG(pts) AS srednia_punkty, AVG(reb) AS srednia_zbiorki, AVG(ast) AS srednia_asysty
+FROM all_seasons
+GROUP BY age
+ORDER BY age;
+
+--Najlepsi strzełu zbiórki i asysty w danym sezonie:
+SELECT season, player_name, pts AS punkty, reb AS zbiorki, ast AS asysty
+FROM all_seasons
+WHERE season = '2021-22'
+ORDER BY pts DESC, reb DESC, ast DESC;
+
+
+
